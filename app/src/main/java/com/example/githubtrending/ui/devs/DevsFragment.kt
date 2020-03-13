@@ -74,13 +74,14 @@ class DevsFragment : Fragment() {
     private fun observeData() {
         mDevsViewModel!!.devsLiveData.observe(
             viewLifecycleOwner,
-            Observer { devResponses ->
+            Observer {
                 mProgressBar!!.visibility = View.GONE
                 mRecyclerView!!.visibility = View.VISIBLE
                 val manager = LinearLayoutManager(context)
-                mAdapter = DevsListAdapter(context, devResponses)
+                mAdapter = DevsListAdapter(context, it!!)
                 mRecyclerView!!.layoutManager = manager
                 mRecyclerView!!.adapter = mAdapter
-            })
+            }
+        )
     }
 }

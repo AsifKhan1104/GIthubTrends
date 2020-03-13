@@ -1,6 +1,8 @@
-package com.example.githubtrending.ui.devs;
+package com.example.githubtrending.ui.repos;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,19 +16,20 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.Adapter;
 
 import com.example.githubtrending.R;
-import com.example.githubtrending.models.DevResponse;
+import com.example.githubtrending.models.RepoResponse;
+import com.example.githubtrending.models.RepoResponse;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class DevsListAdapter extends Adapter<DevsListAdapter.CustomViewHolder> implements Filterable {
+public class RepoListAdapter extends Adapter<RepoListAdapter.CustomViewHolder> implements Filterable {
     private Context context;
     private ItemFilter mFilter = new ItemFilter();
-    public ArrayList<DevResponse> mFilteredList;
-    public ArrayList<DevResponse> mList;
+    public ArrayList<RepoResponse> mFilteredList;
+    public ArrayList<RepoResponse> mList;
 
-    public DevsListAdapter(Context context2, List<DevResponse> list) {
+    public RepoListAdapter(Context context2, List<RepoResponse> list) {
         this.context = context2;
         this.mList = (ArrayList) list;
         this.mFilteredList = (ArrayList) list;
@@ -35,23 +38,36 @@ public class DevsListAdapter extends Adapter<DevsListAdapter.CustomViewHolder> i
     @NonNull
     public CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View listItem = layoutInflater.inflate(R.layout.item_devs, parent, false);
+        View listItem = layoutInflater.inflate(R.layout.item_repo, parent, false);
         CustomViewHolder viewHolder = new CustomViewHolder(listItem);
         return viewHolder;
     }
 
     public void onBindViewHolder(@NonNull CustomViewHolder holder, int position) {
         holder.textViewTitle.setText(mFilteredList.get(position).getName());
-        holder.textViewDesc.setText(mFilteredList.get(position).getUrl());
-        holder.textViewAuthor.setText(mFilteredList.get(position).getUsername());
-        holder.textViewRepoName.setText(mFilteredList.get(position).getRepo().getName());
-        holder.textViewRepoDesc.setText(mFilteredList.get(position).getRepo().getDescription());
+        holder.textViewDesc.setText(mFilteredList.get(position).getDescription());
+        holder.textViewAuthor.setText(mFilteredList.get(position).getAuthor());
+        holder.textViewLang.setText(mFilteredList.get(position).getLanguage());
+        holder.textViewStars.setText(String.valueOf(mFilteredList.get(position).getStars()));
+        holder.textViewForks.setText(String.valueOf(mFilteredList.get(position).getForks()));
+
+        // show repo image
         Picasso.get().load(mFilteredList.get(position).getAvatar())
                 .into(holder.imageViewProfile);
+
+        // show language color
+        if (mFilteredList.get(position).getLanguage() != null) {
+            GradientDrawable drawable = (GradientDrawable) context.getResources().getDrawable(R.drawable.ic_circle);
+            drawable.setColor(Color.parseColor(mFilteredList.get(position).getLanguageColor()));
+            holder.imageViewLangColor.setImageDrawable(drawable);
+        } else {
+            holder.textViewLang.setVisibility(View.GONE);
+            holder.imageViewLangColor.setVisibility(View.GONE);
+        }
     }
 
     public int getItemCount() {
-        return mFilteredList.size();
+        return this.mFilteredList.size();
     }
 
     public Filter getFilter() {
@@ -59,17 +75,20 @@ public class DevsListAdapter extends Adapter<DevsListAdapter.CustomViewHolder> i
     }
 
     public static class CustomViewHolder extends RecyclerView.ViewHolder {
-        public ImageView imageViewProfile;
-        public TextView textViewTitle, textViewDesc, textViewAuthor, textViewRepoName, textViewRepoDesc;
+        public ImageView imageViewProfile, imageViewLangColor;
+        public TextView textViewTitle, textViewDesc, textViewAuthor, textViewLang,
+                textViewStars, textViewForks;
 
         public CustomViewHolder(View itemView) {
             super(itemView);
             imageViewProfile = (ImageView) itemView.findViewById(R.id.item_profile_img);
+            imageViewLangColor = (ImageView) itemView.findViewById(R.id.item_img_language);
             textViewTitle = (TextView) itemView.findViewById(R.id.item_title);
             textViewDesc = (TextView) itemView.findViewById(R.id.item_desc);
             textViewAuthor = (TextView) itemView.findViewById(R.id.item_author);
-            textViewRepoName = (TextView) itemView.findViewById(R.id.item_repo_name);
-            textViewRepoDesc = (TextView) itemView.findViewById(R.id.item_repo_desc);
+            textViewLang = (TextView) itemView.findViewById(R.id.item_language);
+            textViewStars = (TextView) itemView.findViewById(R.id.item_stars);
+            textViewForks = (TextView) itemView.findViewById(R.id.item_fork);
         }
     }
 
@@ -84,13 +103,13 @@ public class DevsListAdapter extends Adapter<DevsListAdapter.CustomViewHolder> i
                 results.values = mList;
             } else {
                 int count = mFilteredList.size();
-                final ArrayList<DevResponse> nlist = new ArrayList<DevResponse>(count);
+                final ArrayList<RepoResponse> nlist = new ArrayList<RepoResponse>(count);
 
                 String filterableString;
                 for (int i = 0; i < count; i++) {
                     filterableString = "" + mFilteredList.get(i).getName();
                     if (filterableString.toLowerCase().contains(filterString)) {
-                        DevResponse response = mFilteredList.get(i);
+                        RepoResponse response = mFilteredList.get(i);
                         nlist.add(response);
                     }
                 }
@@ -104,7 +123,7 @@ public class DevsListAdapter extends Adapter<DevsListAdapter.CustomViewHolder> i
         @SuppressWarnings("unchecked")
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
-            mFilteredList = (ArrayList<DevResponse>) results.values;
+            mFilteredList = (ArrayList<RepoResponse>) results.values;
             notifyDataSetChanged();
         }
 

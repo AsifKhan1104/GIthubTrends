@@ -8,4 +8,28 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="AppCompatButtonStyle">
+        <item name="android:gravity">center</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">@dimen/font_xmedium</item>
+        <item name="android:paddingTop">@dimen/padding_small</item>
+        <item name="android:paddingBottom">@dimen/padding_small</item>
+        <item name="android:paddingLeft">@dimen/padding_xxxlarge</item>
+        <item name="android:paddingRight">@dimen/padding_xxxlarge</item>
+        <item name="android:background">@drawable/btn_visit</item>
+    </style>
+
+
+    <style name="ShareButtonStyle">
+        <item name="android:gravity">center</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textSize">@dimen/font_xmedium</item>
+        <item name="android:paddingTop">@dimen/padding_small</item>
+        <item name="android:paddingBottom">@dimen/padding_small</item>
+        <item name="android:paddingLeft">@dimen/padding_xxxlarge</item>
+        <item name="android:paddingRight">@dimen/padding_xxxlarge</item>
+        <item name="android:background">@drawable/btn_share</item>
+    </style>
 </resources>

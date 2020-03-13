@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.githubtrending.R
+import com.example.githubtrending.viewmodel.RepoViewModel
 
 class RepoFragment : Fragment() {
 
@@ -21,11 +22,11 @@ class RepoFragment : Fragment() {
     ): View? {
         repoViewModel =
                 ViewModelProviders.of(this).get(RepoViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_home, container, false)
-        val textView: TextView = root.findViewById(R.id.text_home)
+        val root = inflater.inflate(R.layout.fragment_repos, container, false)
+        /*val textView: TextView = root.findViewById(R.id.text_home)
         repoViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
-        })
+        })*/
         return root
     }
 }

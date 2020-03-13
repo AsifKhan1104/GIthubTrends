@@ -1,6 +1,21 @@
 <resources>
-    <string name="app_name">GitHubTrending</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
+    <string name="app_name">Github Trends</string>
+    <string name="title_repo">Repositories</string>
+    <string name="title_devs">Developers</string>
     <string name="title_notifications">Notifications</string>
+    <string name="no_internet_msg"><![CDATA[Please check your internet connection & try again.]]></string>
+    <string name="transition_image">image</string>
+    <string name="transition_title">title</string>
+    <string name="transition_background">background</string>
+    <string name="transition_language">language</string>
+
+    <string name="text_contributors">Contributors</string>
+    <string name="text_forks">forks</string>
+    <string name="text_curr_period_stars">Period Stars</string>
+    <string name="text_stars">stars</string>
+    <string name="btn_share">Share</string>
+    <string name="btn_open">Open in Browser</string>
+    <string name="btn_visit">Visit Site</string>
+    <string name="search_repositories">Search Repositories</string>
+    <string name="search_developers">Search Developers</string>
 </resources>

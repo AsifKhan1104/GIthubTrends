@@ -1,4 +1,4 @@
-package com.example.githubtrending.ui.repos
+package com.example.githubtrending.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

@@ -1,6 +1,7 @@
 package com.example.githubtrending.ui.repos;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
@@ -12,12 +13,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.Adapter;
 
 import com.example.githubtrending.R;
 import com.example.githubtrending.models.RepoResponse;
-import com.example.githubtrending.models.RepoResponse;
+import com.example.githubtrending.ui.RepoDetailActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -64,6 +66,16 @@ public class RepoListAdapter extends Adapter<RepoListAdapter.CustomViewHolder> i
             holder.textViewLang.setVisibility(View.GONE);
             holder.imageViewLangColor.setVisibility(View.GONE);
         }
+
+        // on view click
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, RepoDetailActivity.class);
+                intent.putExtra("repoList", mFilteredList.get(position));
+                context.startActivity(intent);
+            }
+        });
     }
 
     public int getItemCount() {
@@ -78,9 +90,11 @@ public class RepoListAdapter extends Adapter<RepoListAdapter.CustomViewHolder> i
         public ImageView imageViewProfile, imageViewLangColor;
         public TextView textViewTitle, textViewDesc, textViewAuthor, textViewLang,
                 textViewStars, textViewForks;
+        public CardView cardView;
 
         public CustomViewHolder(View itemView) {
             super(itemView);
+            cardView = (CardView) itemView.findViewById(R.id.card_view);
             imageViewProfile = (ImageView) itemView.findViewById(R.id.item_profile_img);
             imageViewLangColor = (ImageView) itemView.findViewById(R.id.item_img_language);
             textViewTitle = (TextView) itemView.findViewById(R.id.item_title);

@@ -142,8 +142,6 @@
                         android:gravity="center_vertical"
                         android:paddingStart="@dimen/margin_small"
                         android:paddingLeft="@dimen/margin_small"
-                        android:paddingEnd="@dimen/margin_xxlarge"
-                        android:paddingRight="@dimen/margin_xxlarge"
                         android:textColor="@color/item_color_like"
                         android:textSize="@dimen/font_xmedium"
                         android:transitionName="@string/transition_language"

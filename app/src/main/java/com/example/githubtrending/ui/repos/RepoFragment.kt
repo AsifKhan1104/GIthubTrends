@@ -32,7 +32,7 @@ class RepoFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         mRepoViewModel = ViewModelProviders.of(this).get(RepoViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_devs, container, false)
+        val root = inflater.inflate(R.layout.fragment_repos, container, false)
         mRecyclerView = root.findViewById(R.id.recyclerView)
         mProgressBar = root.findViewById(R.id.progress_bar)
         mEditTextSearch = root.findViewById(R.id.editTextSearch)
